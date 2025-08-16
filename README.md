@@ -46,6 +46,17 @@ python main.py --help
 
 ## 3. References
 
+**Overview**
+
+```
+@article{zhao2025short,
+  title={A Short Overview of Multi-Modal Wi-Fi Sensing},
+  author={Zhao, Zijian},
+  journal={arXiv preprint arXiv:2505.06682},
+  year={2025}
+}
+```
+
 **Fall Detection**
 
 [shawnnn3di/falldewideo](https://github.com/shawnnn3di/falldewideo)
@@ -88,13 +99,11 @@ python main.py --help
 
 [RS2002/CSI-BERT: Official Repository for The Paper, Finding the Missing Data: A BERT-inspired Approach Against Package Loss in Wireless Sensing](https://github.com/RS2002/CSI-BERT)
 
-[RS2002/CSI-BERT2: Official Repository for The Paper,Mining Limited Data Sufficiently: A BERT-inspired Approach for CSI Time Series Application in Wireless Communication and Sensing](https://github.com/RS2002/CSI-BERT2)
+[RS2002/CSI-BERT2: Official Repository for The Paper, CSI-BERT2: A BERT-Inspired Framework for Efficient CSI Prediction and Recognition in Wireless Communication and Sensing](https://github.com/RS2002/CSI-BERT2)
 
 [RS2002/CrossFi: Official Repository for The Paper, CrossFi: A Cross Domain Wi-Fi Sensing Framework Based on Siamese Network](https://github.com/RS2002/CrossFi)
 
 [RS2002/KNN-MMD: Official Repository for The Paper,KNN-MMD: Cross Domain Wireless Sensing via Local Distribution Alignmen](https://github.com/RS2002/KNN-MMD)
-
-
 
 ```
 @inproceedings{zhang2023ratiofi,
@@ -108,33 +117,32 @@ python main.py --help
 ```
 
 ```
-@INPROCEEDINGS{10620769,
+@inproceedings{zhao2024finding,
+  title={Finding the missing data: A bert-inspired approach against package loss in wireless sensing},
   author={Zhao, Zijian and Chen, Tingwei and Meng, Fanyi and Li, Hang and Li, Xiaoyang and Zhu, Guangxu},
-  booktitle={IEEE INFOCOM 2024 - IEEE Conference on Computer Communications Workshops (INFOCOM WKSHPS)}, 
-  title={Finding the Missing Data: A BERT-Inspired Approach Against Package Loss in Wireless Sensing}, 
+  booktitle={IEEE INFOCOM 2024-IEEE Conference on Computer Communications Workshops (INFOCOM WKSHPS)},
+  pages={1--6},
   year={2024},
-  volume={},
-  number={},
-  pages={1-6},
-  keywords={Deep learning;Wireless communication;Interpolation;Wireless sensor networks;Transformers;Data models;Sensors;Bidirectional Encoder Representations from Transformers;Adversarial Learning;Data Recovery;Channel Statement Information;Wi-Fi Sensing},
-  doi={10.1109/INFOCOMWKSHPS61880.2024.10620769}}
+  organization={IEEE}
+}
 ```
 
 ```
 @article{zhao2024mining,
-  title={Mining Limited Data Sufficiently: A BERT-inspired Approach for CSI Time Series Application in Wireless Communication and Sensing},
-  author={Zhao, Zijian and Meng, Fanyi and Li, Hang and Li, Xiaoyang and Zhu, Guangxu},
+  title={CSI-BERT2: A BERT-Inspired Framework for Efficient CSI Prediction and Classification in Wireless Communication and Sensing},
+  author={Zhao, Zijian and Meng, Fanyi and Lyu, Zhonghao and Li, Hang and Li, Xiaoyang and Zhu, Guangxu},
   journal={arXiv preprint arXiv:2412.06861},
   year={2024}
 }
 ```
 
 ```
-@article{zhao2024crossfi,
-  title={CrossFi: A Cross Domain Wi-Fi Sensing Framework Based on Siamese Network},
+@article{zhao2025crossfi,
+  title={Crossfi: A cross domain wi-fi sensing framework based on siamese network},
   author={Zhao, Zijian and Chen, Tingwei and Cai, Zhijie and Li, Xiaoyang and Li, Hang and Chen, Qimei and Zhu, Guangxu},
-  journal={arXiv preprint arXiv:2408.10919},
-  year={2024}
+  journal={IEEE Internet of Things Journal},
+  year={2025},
+  publisher={IEEE}
 }
 ```
 
@@ -154,7 +162,7 @@ python main.py --help
 
 **Tracking / Localization**
 
-[RS2002/LoFi: Official Repository for The Paper, LoFi: Vision-Aided Label Generator for Wi-Fi Location and Tracing](https://github.com/RS2002/LoFi)
+[RS2002/LoFi: Official Repository for The Paper, LoFi: Vision-Aided Label Generator for Wi-Fi Localization and Tracing](https://github.com/RS2002/LoFi)
 
 ```
 @article{zhao2024lofi,
