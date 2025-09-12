@@ -158,7 +158,19 @@ python main.py --help
 }
 ```
 
+```
+@INPROCEEDINGS{11149311,
+  author={Zhao, Zijian and Cai, Zhijie and Chen, Tingwei and Li, Xiaoyang and Li, Hang and Chen, Qimei and Zhu, Guangxu},
+  booktitle={2025 IEEE/CIC International Conference on Communications in China (ICCC)}, 
+  title={Does MMD Really Align? A Cross Domain Wireless Sensing Method via Local Distribution}, 
+  year={2025},
+  volume={},
+  number={},
+  pages={1-6},
+  keywords={Wireless communication;Training;Wireless sensor networks;Codes;Sensitivity;Gesture recognition;Nearest neighbor methods;Stability analysis;Sensors;Wireless fidelity;Few-shot Learning;K-Nearest Neighbors;Maximum Mean Discrepancy;Cross-domain Wireless Sensing;Channel Statement Information},
+  doi={10.1109/ICCC65529.2025.11149311}}
 
+```
 
 **Tracking / Localization**
 
