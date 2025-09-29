@@ -1,5 +1,7 @@
 # ESP32-Realtime-System
 
+**Patent:** 赵子健, 朱光旭, 沈超, 史清江, 韩凯峰 "人员检测方法、装置、电子设备以及存储介质"（申请号：2023116499786，2024）
+
 **Device:** ESP32-S3 (supports other ESP32 models)
 
 ![](./fig/main.png)
