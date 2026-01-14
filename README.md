@@ -130,12 +130,16 @@ python main.py --help
 ```
 
 ```
-@article{zhao2024mining,
-  title={CSI-BERT2: A BERT-Inspired Framework for Efficient CSI Prediction and Classification in Wireless Communication and Sensing},
+@article{zhao2025csi,
   author={Zhao, Zijian and Meng, Fanyi and Lyu, Zhonghao and Li, Hang and Li, Xiaoyang and Zhu, Guangxu},
-  journal={arXiv preprint arXiv:2412.06861},
-  year={2024}
-}
+  journal={IEEE Transactions on Mobile Computing}, 
+  title={CSI-BERT2: A BERT-inspired Framework for Efficient CSI Prediction and Classification in Wireless Communication and Sensing}, 
+  year={2025},
+  volume={},
+  number={},
+  pages={1-17}
+ }
+
 ```
 
 ```
@@ -149,28 +153,27 @@ python main.py --help
 ```
 
 ```
-@misc{zhao2025knnmmdcrossdomainwireless,
-      title={KNN-MMD: Cross Domain Wireless Sensing via Local Distribution Alignment}, 
-      author={Zijian Zhao and Zhijie Cai and Tingwei Chen and Xiaoyang Li and Hang Li and Qimei Chen and Guangxu Zhu},
-      year={2025},
-      eprint={2412.04783},
-      archivePrefix={arXiv},
-      primaryClass={cs.CV},
-      url={https://arxiv.org/abs/2412.04783}, 
-}
+@article{zhao2025knn,
+  author={Zhao, Zijian and Cai, Zhijie and Chen, Tingwei and Li, Xiaoyang and Li, Hang and Chen, Qimei and Zhu, Guangxu},
+  journal={IEEE Transactions on Mobile Computing}, 
+  title={KNN-MMD: Cross Domain Wireless Sensing Via Local Distribution Alignment}, 
+  year={2025},
+  volume={},
+  number={},
+  pages={1-18}
+  }
 ```
 
 ```
-@INPROCEEDINGS{11149311,
+@INPROCEEDINGS{zhao2025does,
   author={Zhao, Zijian and Cai, Zhijie and Chen, Tingwei and Li, Xiaoyang and Li, Hang and Chen, Qimei and Zhu, Guangxu},
   booktitle={2025 IEEE/CIC International Conference on Communications in China (ICCC)}, 
   title={Does MMD Really Align? A Cross Domain Wireless Sensing Method via Local Distribution}, 
   year={2025},
   volume={},
   number={},
-  pages={1-6},
-  keywords={Wireless communication;Training;Wireless sensor networks;Codes;Sensitivity;Gesture recognition;Nearest neighbor methods;Stability analysis;Sensors;Wireless fidelity;Few-shot Learning;K-Nearest Neighbors;Maximum Mean Discrepancy;Cross-domain Wireless Sensing;Channel Statement Information},
-  doi={10.1109/ICCC65529.2025.11149311}}
+  pages={1-6}
+ }
 
 ```
 
@@ -179,10 +182,13 @@ python main.py --help
 [RS2002/LoFi: Official Repository for The Paper, LoFi: Vision-Aided Label Generator for Wi-Fi Localization and Tracing](https://github.com/RS2002/LoFi)
 
 ```
-@article{zhao2024lofi,
+@INPROCEEDINGS{zhao2025lofi,
   title={LoFi: Vision-Aided Label Generator for Wi-Fi Localization and Tracking},
   author={Zhao, Zijian and Chen, Tingwei and Meng, Fanyi and Cai, Zhijie and Li, Hang and Li, Xiaoyang and Zhu, Guangxu},
-  journal={arXiv preprint arXiv:2412.05074},
-  year={2024}
+  booktitle={2025 IEEE Globecom Workshops (GC Wkshps)}, 
+  year={2025},
+  volume={},
+  number={},
+  pages={1-6}
 }
 ```
