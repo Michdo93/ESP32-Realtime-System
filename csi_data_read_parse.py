@@ -14,7 +14,6 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-#
 
 # WARNING: we don't check for Python build-time dependencies until
 # check_environment() function below. If possible, avoid importing
@@ -44,7 +43,7 @@ import time
 CSI_VAID_SUBCARRIER_INTERVAL = 3
 
 # Remove invalid subcarriers
-# secondary channel : below, HT, 40 MHz, non STBC, v, HT-LFT: 0~63, -64~-1, 384
+# Secondary channel: below, HT, 40 MHz, non-STBC, v, HT-LFT: 0~63, -64~-1, 384
 csi_vaid_subcarrier_index = []
 csi_vaid_subcarrier_color = []
 color_step = 255 // (28 // CSI_VAID_SUBCARRIER_INTERVAL + 1)
@@ -59,17 +58,18 @@ CSI_DATA_LLFT_COLUMNS = len(csi_vaid_subcarrier_index)
 # HT-LFT: 56 + 56
 csi_vaid_subcarrier_index += [i for i in range(66, 94, CSI_VAID_SUBCARRIER_INTERVAL)]    # 28  blue
 csi_vaid_subcarrier_color += [(0, 0, i * color_step) for i in range(1,  28 // CSI_VAID_SUBCARRIER_INTERVAL + 2)]
-csi_vaid_subcarrier_index += [i for i in range(95, 123, CSI_VAID_SUBCARRIER_INTERVAL)]   # 28  White
+csi_vaid_subcarrier_index += [i for i in range(95, 123, CSI_VAID_SUBCARRIER_INTERVAL)]   # 28  white
 csi_vaid_subcarrier_color += [(i * color_step, i * color_step, i * color_step) for i in range(1,  28 // CSI_VAID_SUBCARRIER_INTERVAL + 2)]
-# csi_vaid_subcarrier_index += [i for i in range(124, 162)]  # 28  White
-# csi_vaid_subcarrier_index += [i for i in range(163, 191)]  # 28  White
+# csi_vaid_subcarrier_index += [i for i in range(124, 162)]  # 28  white
+# csi_vaid_subcarrier_index += [i for i in range(163, 191)]  # 28  white
 
-CSI_DATA_INDEX = 200  # buffer size
+CSI_DATA_INDEX = 200  # Buffer size
 CSI_DATA_COLUMNS = len(csi_vaid_subcarrier_index)
 DATA_COLUMNS_NAMES = ["type", "id", "mac", "rssi", "rate", "sig_mode", "mcs", "bandwidth", "smoothing", "not_sounding", "aggregation", "stbc", "fec_coding",
                       "sgi", "noise_floor", "ampdu_cnt", "channel", "secondary_channel", "local_timestamp", "ant", "sig_len", "rx_state", "len", "first_word", "data"]
 csi_data_array = np.zeros(
     [CSI_DATA_INDEX, CSI_DATA_COLUMNS], dtype=np.complex64)
+
 
 class csi_data_graphical_window(QWidget):
     def __init__(self):
@@ -107,9 +107,9 @@ def csi_data_read_parse(port: str, csv_writer):
     ser = serial.Serial(port=port, baudrate=921600,
                         bytesize=8, parity='N', stopbits=1)
     if ser.isOpen():
-        print("open success")
+        print("Port opened successfully")
     else:
-        print("open failed")
+        print("Failed to open port")
         return
 
     while True:
@@ -127,22 +127,22 @@ def csi_data_read_parse(port: str, csv_writer):
         csi_data = next(csv_reader)
 
         if len(csi_data) != len(DATA_COLUMNS_NAMES):
-            print("element number is not equal")
+            print("Element count does not match")
             continue
 
         try:
             csi_raw_data = json.loads(csi_data[-1])
         except json.JSONDecodeError:
-            print(f"data is incomplete")
+            print("Data is incomplete")
             continue
 
         if len(csi_raw_data) != 128 and len(csi_raw_data) != 256 and len(csi_raw_data) != 384:
-            print(f"element number is not equal: {len(csi_raw_data)}")
+            print(f"Unexpected element count: {len(csi_raw_data)}")
             continue
 
         csv_writer.writerow(csi_data)
 
-        # Rotate data to the left
+        # Shift data buffer left by one entry
         csi_data_array[:-1] = csi_data_array[1:]
 
         if len(csi_raw_data) == 128:
@@ -158,7 +158,7 @@ def csi_data_read_parse(port: str, csv_writer):
     return
 
 
-class SubThread (QThread):
+class SubThread(QThread):
     def __init__(self, serial_port, save_file_name):
         super().__init__()
         self.serial_port = serial_port
@@ -176,7 +176,7 @@ class SubThread (QThread):
 
 if __name__ == '__main__':
     if sys.version_info < (3, 6):
-        print(" Python version should >= 3.6")
+        print("Python version must be >= 3.6")
         exit()
 
     parser = argparse.ArgumentParser(
@@ -188,11 +188,11 @@ if __name__ == '__main__':
     parser.add_argument('-d', '--delay', dest='delay', type=int, default=0,
                         help="Delay in seconds before the program starts")
     parser.add_argument('-t', '--time', dest='time', type=int, default=0,
-                    help="Recording time in seconds")
+                        help="Recording time in seconds")
 
     args = parser.parse_args()
 
-    # 延迟执行
+    # Delayed start
     if args.delay > 0:
         print(f"Delaying start for {args.delay} seconds...")
         time.sleep(args.delay)
