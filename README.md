@@ -1,6 +1,6 @@
 # ESP32-Realtime-System
 
-**Patent:** 赵子健, 朱光旭, 沈超, 史清江, 韩凯峰 "人员检测方法、装置、电子设备以及存储介质"（申请号：2023116499786，2024）
+**Patent:** Zhao Zijian, Zhu Guangxu, Shen Chao, Shi Qingjiang, Han Kaifeng "Personnel Detection Method, Device, Electronic Equipment and Storage Medium" (Application No.: 2023116499786, 2024)
 
 **Device:** ESP32-S3 (supports other ESP32 models)
 
