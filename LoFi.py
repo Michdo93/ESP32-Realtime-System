@@ -2,54 +2,54 @@ import cv2
 import numpy as np
 
 def get_dst_points():
-    print("请在图片中依次点击四个锚点")
+    print("Please click four anchor points in the image")
 
-    # 初始化摄像头
+    # Initialize camera
     cap = cv2.VideoCapture(0)
-    # 存储点击的点的数组
+    # Array to store clicked points
     points = []
 
-    # 鼠标点击事件的回调函数
+    # Mouse click event callback function
     def mouse_click(event, x, y, flags, param):
         if event == cv2.EVENT_LBUTTONDOWN:
             points.append((x, y))
             print(f"Point {len(points)}: ({x}, {y})")
-            # 当点击了四个点后，退出
+            # Exit after four points have been clicked
             if len(points) == 4:
                 cv2.destroyAllWindows()
                 cap.release()
 
-    # 创建窗口并设置鼠标回调函数
+    # Create window and set mouse callback function
     cv2.namedWindow("Image")
     cv2.setMouseCallback("Image", mouse_click)
 
     while True:
-        # 读取摄像头图像
+        # Read camera frame
         ret, frame = cap.read()
         if not ret:
             break
 
-        # 显示已经点击的点
+        # Display already clicked points
         for i, point in enumerate(points):
             cv2.circle(frame, point, 5, (0, 0, 255), -1)
             cv2.putText(frame, f"{i + 1}", (point[0] + 10, point[1]), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 255, 0), 2)
 
-        # 显示图像
+        # Show image
         cv2.imshow("Image", frame)
 
-        # 按 'q' 键退出
+        # Press 'q' to quit
         if cv2.waitKey(1) & 0xFF == ord('q'):
             break
 
-    # 释放资源
+    # Release resources
     cap.release()
     cv2.destroyAllWindows()
 
-    # 打印存储的点
-    print("锚点坐标采集完成:", points)
+    # Print stored points
+    print("Anchor point collection complete:", points)
     return np.array(points, dtype="float32")
 
-def LoFi(src_points = np.array([[0, 0], [1.80, 0], [0, 4.80], [1.80, 4.80]], dtype="float32"),dst_points = None, model_path = "./yolo"):
+def LoFi(src_points=np.array([[0, 0], [1.80, 0], [0, 4.80], [1.80, 4.80]], dtype="float32"), dst_points=None, model_path="./yolo"):
     if dst_points is None:
         dst_points = get_dst_points()
     M = cv2.getPerspectiveTransform(src_points, dst_points)
@@ -65,26 +65,26 @@ def LoFi(src_points = np.array([[0, 0], [1.80, 0], [0, 4.80], [1.80, 4.80]], dty
             cv2.putText(img, line, (x, y), font, font_scale, text_color, font_thickness)
             y += h + 10  # Line spacing
 
-    # 加载 YOLO
-    net = cv2.dnn.readNet(model_path+"/yolov3.weights", model_path+"/yolov3.cfg")
+    # Load YOLO
+    net = cv2.dnn.readNet(model_path + "/yolov3.weights", model_path + "/yolov3.cfg")
     layer_names = net.getLayerNames()
     output_layers = [layer_names[i - 1] for i in net.getUnconnectedOutLayers()]
     # with open("coco.names", "r") as f:
     #     classes = [line.strip() for line in f.readlines()]
 
-    # 启动摄像头
+    # Start camera
     cap = cv2.VideoCapture(0)
 
     while True:
         ret, frame = cap.read()
         height, width, channels = frame.shape
 
-        # 预处理
+        # Preprocessing
         blob = cv2.dnn.blobFromImage(frame, 0.00392, (416, 416), (0, 0, 0), True, crop=False)
         net.setInput(blob)
         outs = net.forward(output_layers)
 
-        # 分析输出
+        # Analyze output
         class_ids = []
         confidences = []
         boxes = []
@@ -94,13 +94,13 @@ def LoFi(src_points = np.array([[0, 0], [1.80, 0], [0, 4.80], [1.80, 4.80]], dty
                 class_id = np.argmax(scores)
                 confidence = scores[class_id]
                 if confidence > 0.5:
-                    # 框坐标
+                    # Bounding box coordinates
                     center_x = int(detection[0] * width)
                     center_y = int(detection[1] * height)
                     w = int(detection[2] * width)
                     h = int(detection[3] * height)
 
-                    # 框起始点
+                    # Bounding box origin point
                     x = int(center_x - w / 2)
                     y = int(center_y - h / 2)
 
@@ -108,18 +108,18 @@ def LoFi(src_points = np.array([[0, 0], [1.80, 0], [0, 4.80], [1.80, 4.80]], dty
                     confidences.append(float(confidence))
                     class_ids.append(class_id)
 
-        # 非极大值抑制
+        # Non-maximum suppression
         indexes = cv2.dnn.NMSBoxes(boxes, confidences, 0.5, 0.4)
 
         title = "No object detected"
-        # 只保留置信度最高的框
+        # Keep only the box with the highest confidence
         if len(indexes) > 0:
             best_index = indexes.flatten()[0]
             x, y, w, h = boxes[best_index]
             # label = str(classes[class_ids[best_index]])
             confidence = confidences[best_index]
 
-            # 计算底部中点坐标
+            # Calculate bottom center coordinates
             bottom_center_x = x + w // 2
             bottom_center_y = y + h
 
@@ -130,25 +130,25 @@ def LoFi(src_points = np.array([[0, 0], [1.80, 0], [0, 4.80], [1.80, 4.80]], dty
 
             title = f"Coordinate:({actual_coords[0, 0, 0]:.2f}, {actual_coords[0, 0, 1]:.2f}), Confidence Level:{confidence:.2f}"
             # title = f"Coordinate:({bottom_center_x}, {bottom_center_y}), Confidence:{confidence:.2f}"
-            # 画框
+            # Draw bounding box
             cv2.rectangle(frame, (x, y), (x + w, y + h), (0, 255, 0), 2)
             # cv2.putText(frame, f"{label} {confidence:.2f}", (x, y - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 255, 0), 2)
 
-        # 在图像上方添加标题
+        # Add title bar at the top of the image
         frame = cv2.copyMakeBorder(frame, 50, 0, 0, 0, cv2.BORDER_CONSTANT, value=(0, 0, 0))
         # cv2.putText(frame, title, (10, 30), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 255, 255), 2)
         draw_text(frame, title, (10, 30), cv2.FONT_HERSHEY_SIMPLEX, 0.7, 2, (255, 255, 255), (0, 0, 0))
 
-        # 显示实时视频流
+        # Display live video stream
         cv2.imshow("Image", frame)
 
-        # 按 'q' 键退出
+        # Press 'q' to quit
         if cv2.waitKey(1) & 0xFF == ord('q'):
             break
 
     cap.release()
     cv2.destroyAllWindows()
 
-#test
+# Test
 if __name__ == '__main__':
     LoFi()
